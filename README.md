@@ -1,6 +1,5 @@
-# squares-web
-
-> A Vue.js project
+# vfb-base-app
+> A base application set up with vue.js, firebase and bootstrap. With working login/logout flow and db connections.
 
 ## Build Setup
 
