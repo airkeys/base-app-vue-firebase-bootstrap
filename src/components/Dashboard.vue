@@ -2,12 +2,12 @@
     <div class="dashboard">
         <h1>{{ msg }}</h1>
         <h2>{{ uid }}</h2>
-        <h2>{{ name[".value"] }}</h2>
+        <h2>{{ userData ? userData.displayName : 'Loading...' }}</h2>
     </div>
 </template>
 
 <script>
-import firebase from 'firebase'
+import firebase from 'firebase';
 
 //Setup Firebase
 var config = {
@@ -26,13 +26,8 @@ export default {
     data () {
         return {
             msg: 'This is your dashboard',
-            uid: null
-        }
-    },
-    firebase : {
-        name : {
-            source : db.ref('users/'+this.uid+'/displayName'),
-            asObject : true
+            uid: null,
+            userData: null
         }
     },
     created () {
@@ -47,6 +42,7 @@ export default {
             firebase.auth().onAuthStateChanged(function(user){
                 if(user){
                     self.uid = user.uid;
+                    self.$bindAsObject('userData', db.ref('users/'+user.uid));
                 }else{
                     self.uid = 'error';
                 }

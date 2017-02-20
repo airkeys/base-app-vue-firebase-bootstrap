@@ -11,7 +11,15 @@ Vue.use(Router);
 
 export default new Router({
     routes: [
-        { path: '/', component: Hello },
+        { path: '/', component: Hello, beforeEnter : (to, from, next) => {
+            firebase.auth().onAuthStateChanged(function(user){
+                if(user){
+                    next('/dashboard');
+                }else{
+                    next();
+                }
+            });            
+        }},
         { path: '/about', component: About},
         { path: '/login', component: Login},
         { path: '/dashboard', component: Dashboard, beforeEnter : (to, from, next) => {
@@ -19,7 +27,7 @@ export default new Router({
                 if(user){
                     next();
                 }else{
-                    next('/404');
+                    next('/');
                 }
             });
         }},
