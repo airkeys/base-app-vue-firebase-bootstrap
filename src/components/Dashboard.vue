@@ -1,16 +1,19 @@
 <template>
-    <div class="hello">
+    <div class="dashboard">
         <h1>{{ msg }}</h1>
     </div>
 </template>
 
 <script>
+
 export default {
-    name: 'hello',
+    name: 'dashboard',
     data () {
         return {
-            msg: 'Welcome to Squares'
+            msg: 'This is your dashboard'
         }
+    },
+    methods : {
     }
 }
 </script>
